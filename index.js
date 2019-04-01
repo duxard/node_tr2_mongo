@@ -10,12 +10,23 @@ const port = process.env.port || 3000;
 const app = express();
 
 //Connect to mongodb
-mongoose.connect('mongodb+srv://duxard:<pswd>@cluster0-wgddl.mongodb.net/test?retryWrites=true', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://duxard:<pswd>@cluster0-wgddl.mongodb.net/test?retryWrites=true', { useNewUrlParser: true })
+.then(data => console.log(`Data: ${data}`))
+.catch(err => console.log(`Error: ${err}`));
 //mongoose.Promise = global.Promise;
 
+//DB blueprint
 const todoSchema = new mongoose.Schema({
     item: String
 }); 
+
+//Model type based on MongoDB schema
+//const Todo = mongoose.model("Todo", todoSchema);
+//let itemOne = Todo({item: "First item"}).save(function(err){
+//    if(err) throw new Error();
+//    console.log("Item saved");
+//});
+
 
 /*
 const MongoClient = require(‘mongodb’).MongoClient;
