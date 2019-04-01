@@ -10,7 +10,7 @@ const port = process.env.port || 3000;
 const app = express();
 
 //Connect to mongodb
-mongoose.connect('mongodb+srv://duxard:<pswd>@cluster0-wgddl.mongodb.net/test?retryWrites=true', { useNewUrlParser: true })
+mongoose.connect('mongodb+srv://duxard23:<pswd>@cluster0-wgddl.mongodb.net/test?retryWrites=true', { useNewUrlParser: true })
 .then(data => console.log(`Data: ${data}`))
 .catch(err => console.log(`Error: ${err}`));
 //mongoose.Promise = global.Promise;
@@ -21,11 +21,11 @@ const todoSchema = new mongoose.Schema({
 }); 
 
 //Model type based on MongoDB schema
-//const Todo = mongoose.model("Todo", todoSchema);
-//let itemOne = Todo({item: "First item"}).save(function(err){
-//    if(err) throw new Error();
-//    console.log("Item saved");
-//});
+const Todo = mongoose.model("Todo", todoSchema);
+let itemOne = Todo({item: "Second item"}).save(function(err){
+    if(err) throw new Error();
+    console.log("Item saved");
+});
 
 
 /*
