@@ -1,30 +1,11 @@
 const express = require('express');
 const router = express.Router();
-//const Animals = require('../models/animals');
-
-//const testObject = {
-//    x: 100,
-//    y: 200,
-//    days: ["Monday", "Tuesday", "Wednesday", "Tuesday"],
-//	id:[11, 22, 33, 44],
-//    months: {
-//        jan: true,
-//        feb: true,
-//        mar: false
-//    },
-//    city: "New York",
-//    country: "USA",
-//	obj: {
-//		innerObj: {
-//			href: "http://vk.com"
-//		}
-//	}
-//};
 
 router.get('/', (req, res, next) => {
     res.send("Homepage");
 });
 
+module.exports = router;
 /*
 //get a list of animals from the DB
 router.get('/animals', function(req, res, next){
@@ -56,4 +37,3 @@ router.get('/animals/test', function(req, res, next){
 
 });
 */
-module.exports = router;

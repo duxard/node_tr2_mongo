@@ -5,6 +5,8 @@ const path = require('path'),
       routes = require('./routes/api'),
       port = process.env.PORT || 3000;
 
+const Todo = require('./models/Todo.js');
+
 require('dotenv').config();
 
 //Set up application
@@ -14,22 +16,6 @@ const app = express();
 mongoose.connect(`mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_USER}@cluster0-wgddl.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true })
 .then(data => console.log(`Data: ${data}`))
 .catch(err => console.log(`Error: ${err}`));
-//mongoose.Promise = global.Promise;
-
-//DB blueprint
-const todoSchema = new mongoose.Schema({
-    item: String
-});
-
-//Model type based on MongoDB schema
-const Todo = mongoose.model("Todo", todoSchema);
-
-/*
-let itemOne = Todo({item: "Asta 1 i"}).save(function(err){
-    if(err) throw new Error();
-    console.log("Item saved");
-});
-*/
 
 app.get('/todo', (req, res) => {
     Todo.find({}, (err, data) => {
