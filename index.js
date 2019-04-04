@@ -2,9 +2,11 @@ const path = require('path'),
       express = require('express'),
       bodyParser = require('body-parser'),
       mongoose = require('mongoose'),
-      routes = require('./routes/api');
+      routes = require('./routes/api'),
 
-const port = process.env.port || 3000;
+      port = process.env.port || 3000;
+
+require('dotenv').config();
 
 //Set up application
 const app = express();
@@ -18,7 +20,7 @@ mongoose.connect('mongodb+srv://duxard23:<pswd>@cluster0-wgddl.mongodb.net/test?
 //DB blueprint
 const todoSchema = new mongoose.Schema({
     item: String
-}); 
+});
 
 //Model type based on MongoDB schema
 const Todo = mongoose.model("Todo", todoSchema);
@@ -26,7 +28,6 @@ let itemOne = Todo({item: "Second item"}).save(function(err){
     if(err) throw new Error();
     console.log("Item saved");
 });
-
 
 /*
 const MongoClient = require(‘mongodb’).MongoClient;
@@ -60,5 +61,6 @@ app.get('/', function(req, res){
 
 //Set up server
 app.listen(port, () => {
+    console.log(`NODE_ENV value: ${process.env.NODE_ENV}`);
     console.log(`Now listening for requests on localhost:${port}`);
 });
