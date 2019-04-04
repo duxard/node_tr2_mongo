@@ -3,7 +3,8 @@ const path = require('path'),
       bodyParser = require('body-parser'),
       mongoose = require('mongoose'),
       routes = require('./routes/api'),
-      port = process.env.PORT || 3000;
+      port = process.env.PORT || 3000,
+      heroku = process.env.HEROKU || null;
 
 require('dotenv').config();
 
@@ -31,7 +32,7 @@ app.use(function(err, req, res, next){
 
 //Homepage
 app.get('/', function(req, res){
-    res.send("Test");
+    res.send(`Test, heroku env var: ${heroku}`);
 });
 
 //Set up server
