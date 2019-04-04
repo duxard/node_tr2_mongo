@@ -2,15 +2,16 @@ const path = require('path'),
       express = require('express'),
       bodyParser = require('body-parser'),
       mongoose = require('mongoose'),
-      routes = require('./routes/api'),
-
-      port = process.env.port || 3000;
+      routes = require('./routes/api');
 
 require('dotenv').config();
+
+const port = process.env.port || 3000;
 
 //Set up application
 const app = express();
 
+/*
 //Connect to mongodb
 mongoose.connect('mongodb+srv://duxard23:<pswd>@cluster0-wgddl.mongodb.net/test?retryWrites=true', { useNewUrlParser: true })
 .then(data => console.log(`Data: ${data}`))
@@ -28,7 +29,7 @@ let itemOne = Todo({item: "Second item"}).save(function(err){
     if(err) throw new Error();
     console.log("Item saved");
 });
-
+*/
 /*
 const MongoClient = require(‘mongodb’).MongoClient;
 const uri = "mongodb+srv://duxard:<password>@cluster0-wgddl.mongodb.net/test?retryWrites=true";
