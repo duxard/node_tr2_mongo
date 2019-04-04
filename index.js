@@ -23,21 +23,34 @@ const todoSchema = new mongoose.Schema({
 
 //Model type based on MongoDB schema
 const Todo = mongoose.model("Todo", todoSchema);
+
+/*
 let itemOne = Todo({item: "Asta 1 i"}).save(function(err){
     if(err) throw new Error();
     console.log("Item saved");
 });
-
-/*
-const MongoClient = require(‘mongodb’).MongoClient;
-const uri = "mongodb+srv://duxard:<password>@cluster0-wgddl.mongodb.net/test?retryWrites=true";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
 */
+
+app.get('/todo', (req, res) => {
+    Todo.find({}, (err, data) => {
+        if(err) throw new Error(err);
+        res.send(data);
+    });
+});
+
+app.post('/todo', (req, res) => {
+    Todo(req.body).save((err, data) => {
+        if(err) throw new Error(err);
+        res.json(data);
+    });
+});
+
+app.delete('/todo/:item', (req, res) => {
+    Todo.find({item: req.params.item.replace(/\-/g, " ")}).remove((err, data) => {
+        if(err) throw new Error(err);
+        res.json(data);
+    });
+});
 
 //Static directory
 app.use(express.static(__dirname + '/public'));
@@ -63,3 +76,17 @@ app.listen(port, () => {
     console.log(`NODE_ENV value: ${process.env.NODE_ENV}`);
     console.log(`Now listening for requests on localhost:${port}`);
 });
+
+/*****************************************************/
+
+
+/*
+const MongoClient = require(‘mongodb’).MongoClient;
+const uri = "mongodb+srv://duxard:<password>@cluster0-wgddl.mongodb.net/test?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+*/
