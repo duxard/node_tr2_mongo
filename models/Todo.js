@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 //DB blueprint
 const todoSchema = new mongoose.Schema({

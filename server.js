@@ -5,38 +5,15 @@ const path = require('path'),
       routes = require('./routes/api'),
       port = process.env.PORT || 3000;
 
-const Todo = require('./models/Todo.js');
-
 require('dotenv').config();
 
 //Set up application
 const app = express();
 
 //Connect to mongodb
-mongoose.connect(`mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_USER}@cluster0-wgddl.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true })
-.then(data => console.log(`Data: ${data}`))
-.catch(err => console.log(`Error: ${err}`));
-
-app.get('/todo', (req, res) => {
-    Todo.find({}, (err, data) => {
-        if(err) throw new Error(err);
-        res.send(data);
-    });
-});
-
-app.post('/todo', (req, res) => {
-    Todo(req.body).save((err, data) => {
-        if(err) throw new Error(err);
-        res.json(data);
-    });
-});
-
-app.delete('/todo/:item', (req, res) => {
-    Todo.find({item: req.params.item.replace(/\-/g, " ")}).remove((err, data) => {
-        if(err) throw new Error(err);
-        res.json(data);
-    });
-});
+mongoose.connect(`mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster0-wgddl.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true })
+    .then(data => console.log(`MongoDB: connected successfully`))
+    .catch(err => console.log(`MongoDB: fail`));
 
 //Static directory
 app.use(express.static(__dirname + '/public'));
