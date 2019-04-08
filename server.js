@@ -24,10 +24,17 @@ app.use(bodyParser.json());
 
 //API routs: initialize routes middleware
 app.use('/api', routes);
-
+/*
 //Error handling middleware
 app.use(function(err, req, res, next){
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.status(422).send({error: err.message});
+});
+*/
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
 });
 
 //Homepage
