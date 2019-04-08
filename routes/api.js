@@ -15,6 +15,7 @@ router.get('/todo', (req, res) => {
 });
 
 router.post('/todo', (req, res) => {
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3100');
     Todo(req.body).save((err, data) => {
         if(err) throw new Error(err);
         res.json(data);
