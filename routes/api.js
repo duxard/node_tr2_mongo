@@ -26,12 +26,12 @@ router.post('/todo', (req, res) => {
         res.json(data);
     });
 });
-/*
-router.delete('/todo/:item', (req, res) => {
-    Todo.find({item: req.params.item.replace(/\-/g, " ")}).remove((err, data) => {
+
+router.delete('/todo/:id', (req, res) => {
+    Todo.find({_id: req.params.id}).remove((err, data) => {
         if(err) throw new Error(err);
         res.json(data);
     });
 });
-*/
+
 module.exports = router;
