@@ -1,5 +1,4 @@
-const mongoose = require('mongoose'),
-      Timestamp = mongoose.mongo.Timestamp;
+const mongoose = require('mongoose');
 //DB blueprint
 const projectsSchema = new mongoose.Schema({
     title: {
@@ -19,7 +18,7 @@ const projectsSchema = new mongoose.Schema({
       required: true
     },
     createdAt: {
-      type: Timestamp,
+      type: Date,
       required: true
     }
 });
