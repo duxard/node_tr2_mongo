@@ -1,7 +1,8 @@
 const express = require('express'),
       router = express.Router(),
       Todo = require('../models/Todo.js'),
-      Post = require('../models/Post.js');
+      Post = require('../models/Post.js'),
+      Projects = require('../models/Projects.js');
 
 router.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -11,6 +12,7 @@ router.use(function(req, res, next) {
 	next();
 });
 
+//react_tr1
 router.get('/', (req, res, next) => {
     res.send("API root page...");
 });
@@ -36,6 +38,7 @@ router.delete('/todo/:id', (req, res) => {
     });
 });
 
+//redux-simple-app
 router.get('/post', (req, res) => {
     Post.find({}, (err, data) => {
         if(err) throw new Error(err);
@@ -50,4 +53,18 @@ router.post('/post', (req, res) => {
     });
 });
 
+//react-redux-main-prj
+router.get('/projects', (req, res) => {
+    Projects.find({}, (err, data) => {
+        if(err) throw new Error(err);
+        res.send(data);
+    });
+});
+
+router.post('/projects', (req, res) => {
+    Projects(req.body).save((err, data) => {
+        if(err) throw new Error(err);
+        res.json(data);
+    });
+});
 module.exports = router;
