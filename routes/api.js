@@ -53,6 +53,13 @@ router.post('/post', (req, res) => {
     });
 });
 
+router.delete('/post/:id', (req, res) => {
+    Post.find({_id: req.params.id}).remove((err, data) => {
+        if(err) throw new Error(err);
+        res.json(data);
+    });
+});
+
 //react-redux-main-prj
 router.get('/projects', (req, res) => {
     Projects.find({}, (err, data) => {
@@ -67,4 +74,12 @@ router.post('/projects', (req, res) => {
         res.json(data);
     });
 });
+
+router.delete('/projects/:id', (req, res) => {
+    Projects.find({_id: req.params.id}).remove((err, data) => {
+        if(err) throw new Error(err);
+        res.json(data);
+    });
+});
+
 module.exports = router;
