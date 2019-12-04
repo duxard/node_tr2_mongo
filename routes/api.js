@@ -2,7 +2,8 @@ const express = require('express'),
       router = express.Router(),
       Todo = require('../models/Todo.js'),
       Post = require('../models/Post.js'),
-      Projects = require('../models/Projects.js');
+      Projects = require('../models/Projects.js'),
+      InstagramPosts = require('../models/InstagramPosts.js');
 
 router.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -77,6 +78,21 @@ router.post('/projects', (req, res) => {
 
 router.delete('/projects/:id', (req, res) => {
     Projects.find({_id: req.params.id}).remove((err, data) => {
+        if(err) throw new Error(err);
+        res.json(data);
+    });
+});
+
+//instagram instagramPosts
+router.get('/instposts', (req, res) => {
+    InstagramPosts.find({}, (err, data) => {
+        if(err) throw new Error(err);
+        res.send(data);
+    });
+});
+
+router.post('/instposts', (req, res) => {
+    InstagramPosts(req.body).save((err, data) => {
         if(err) throw new Error(err);
         res.json(data);
     });
