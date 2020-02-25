@@ -12,7 +12,9 @@ require('dotenv').config();
 const app = express();
 
 //Connect to mongodb
-mongoose.connect(`mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster0-wgddl.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true })
+mongoose.connect(
+  `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster0-wgddl.mongodb.net/test?retryWrites=true`,
+  { useNewUrlParser: true, useUnifiedTopology: true })
     .then(data => console.log(`MongoDB: connected successfully`))
     .catch(err => console.log(`MongoDB: fail`));
 

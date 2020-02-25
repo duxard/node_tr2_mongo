@@ -3,7 +3,8 @@ const express = require('express'),
       Todo = require('../models/Todo.js'),
       Post = require('../models/Post.js'),
       Projects = require('../models/Projects.js'),
-      InstagramPosts = require('../models/InstagramPosts.js');
+      InstagramPosts = require('../models/InstagramPosts.js'),
+      NewsFeed = require('../models/NewsFeed.js');
 
 router.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -93,6 +94,21 @@ router.get('/instposts', (req, res) => {
 
 router.post('/instposts', (req, res) => {
     InstagramPosts(req.body).save((err, data) => {
+        if(err) throw new Error(err);
+        res.json(data);
+    });
+});
+
+// news feed
+router.get('/newsfeed', (req, res) => {
+    NewsFeed.find({}, (err, data) => {
+        if(err) throw new Error(err);
+        res.send(data);
+    });
+});
+
+router.post('/newsfeed', (req, res) => {
+    NewsFeed(req.body).save((err, data) => {
         if(err) throw new Error(err);
         res.json(data);
     });
