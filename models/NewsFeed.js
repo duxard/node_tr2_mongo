@@ -12,6 +12,10 @@ const newsSchema = new mongoose.Schema({
     rating: {
       type: Number,
       required: true
+    },
+    date: {
+        type: Date,
+        required: true
     }
 });
 
