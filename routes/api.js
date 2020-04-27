@@ -115,4 +115,11 @@ router.post('/newsfeed', (req, res) => {
     });
 });
 
+router.delete('/newsfeed/:id', (req, res) => {
+    NewsFeed.find({_id: req.params.id}).remove((err, data) => {
+        if(err) throw new Error(err);
+        res.json(data);
+    });
+});
+
 module.exports = router;
