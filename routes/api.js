@@ -125,9 +125,20 @@ router.delete('/newsfeed/:id', (req, res) => {
 
 // Angular Authentication Tutorial
 router.post('/aat/register', (req, res) => {
-    User(req.body).save((err, registeredUser) => {
-        if(err) throw new Error(err);
-        res.status(200).send(registeredUser);
+    const newUser = req.body;
+    User.findOne({email: newUser.email}, (err, user) => {
+        if(err) {
+            throw new Error(err);
+        } else {
+            if(!user) {
+                User(newUser).save((err, registeredUser) => {
+                    if(err) throw new Error(err);
+                    res.status(200).send(registeredUser);
+                });
+            } else {
+                res.status(400).send('The email already exists');
+            }
+        }
     });
 });
 
