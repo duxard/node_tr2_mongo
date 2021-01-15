@@ -6,6 +6,8 @@ const path = require('path'),
       port = process.env.PORT || 3000,
       heroku = process.env.HEROKU || null;
 
+const ngJWTRoutes = require('./ng-jwt-routes/api');
+
 require('dotenv').config();
 
 //Set up application
@@ -26,6 +28,7 @@ app.use(bodyParser.json());
 
 //API routs: initialize routes middleware
 app.use('/api', routes);
+app.use('/jwt', ngJWTRoutes);
 
 //Homepage
 app.get('/', function(req, res){

@@ -1,11 +1,11 @@
 const express = require('express'),
       router = express.Router(),
+      jwt = require('jsonwebtoken'),
       Todo = require('../models/Todo.js'),
       Post = require('../models/Post.js'),
       Projects = require('../models/Projects.js'),
       InstagramPosts = require('../models/InstagramPosts.js'),
-      NewsFeed = require('../models/NewsFeed.js'),
-      User = require('../models/User.js');
+      NewsFeed = require('../models/NewsFeed.js');
 
 router.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -121,128 +121,6 @@ router.delete('/newsfeed/:id', (req, res) => {
         if(err) throw new Error(err);
         res.json(data);
     });
-});
-
-// Angular Authentication Tutorial
-router.post('/aat/register', (req, res) => {
-    const newUser = req.body;
-    User.findOne({email: newUser.email}, (err, user) => {
-        if(err) {
-            throw new Error(err);
-        } else {
-            if(!user) {
-                User(newUser).save((err, registeredUser) => {
-                    if(err) throw new Error(err);
-                    res.status(200).send(registeredUser);
-                });
-            } else {
-                res.status(400).send('The email already exists');
-            }
-        }
-    });
-});
-
-router.post('/aat/login', (req, res) => {
-    const userData = req.body;
-    User.findOne({email: userData.email}, (err, user) => {
-        if(err) {
-            throw new Error(err);
-        } else {
-            if(!user) {
-                res.status(401).send('Invalid email');
-            } else if(user.password !== userData.password) {
-                res.status(401).send('Invalid password');
-            } else {
-                res.status(200).send(user);
-            }
-        }
-    });
-});
-
-// TODO: move it to real collection in future
-router.get('/aat/events', (req,res) => {
-    let events = [
-        {
-            "_id": "1",
-            "name": "Auto Expo",
-            "description": "lorem ipsum",
-            "date": "2012-04-23T18:25:43.511Z"
-        },
-        {
-            "_id": "2",
-            "name": "Auto Expo",
-            "description": "lorem ipsum",
-            "date": "2012-04-23T18:25:43.511Z"
-        },
-        {
-            "_id": "3",
-            "name": "Auto Expo",
-            "description": "lorem ipsum",
-            "date": "2012-04-23T18:25:43.511Z"
-        },
-        {
-            "_id": "4",
-            "name": "Auto Expo",
-            "description": "lorem ipsum",
-            "date": "2012-04-23T18:25:43.511Z"
-        },
-        {
-            "_id": "5",
-            "name": "Auto Expo",
-            "description": "lorem ipsum",
-            "date": "2012-04-23T18:25:43.511Z"
-        },
-        {
-            "_id": "6",
-            "name": "Auto Expo",
-            "description": "lorem ipsum",
-            "date": "2012-04-23T18:25:43.511Z"
-        }
-    ];
-    res.json(events)
-});
-
-// TODO: move it to real collection in future
-router.get('/aat/special', (req, res) => {
-    let specialEvents = [
-        {
-            "_id": "1",
-            "name": "Auto Expo Special",
-            "description": "lorem ipsum",
-            "date": "2012-04-23T18:25:43.511Z"
-        },
-        {
-            "_id": "2",
-            "name": "Auto Expo Special",
-            "description": "lorem ipsum",
-            "date": "2012-04-23T18:25:43.511Z"
-        },
-        {
-            "_id": "3",
-            "name": "Auto Expo Special",
-            "description": "lorem ipsum",
-            "date": "2012-04-23T18:25:43.511Z"
-        },
-        {
-            "_id": "4",
-            "name": "Auto Expo Special",
-            "description": "lorem ipsum",
-            "date": "2012-04-23T18:25:43.511Z"
-        },
-        {
-            "_id": "5",
-            "name": "Auto Expo Special",
-            "description": "lorem ipsum",
-            "date": "2012-04-23T18:25:43.511Z"
-        },
-        {
-            "_id": "6",
-            "name": "Auto Expo Special",
-            "description": "lorem ipsum",
-            "date": "2012-04-23T18:25:43.511Z"
-        }
-    ];
-    res.json(specialEvents)
 });
 
 module.exports = router;
