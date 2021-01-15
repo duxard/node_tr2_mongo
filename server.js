@@ -2,11 +2,10 @@ const path = require('path'),
       express = require('express'),
       bodyParser = require('body-parser'),
       mongoose = require('mongoose'),
-      routes = require('./routes/api'),
       port = process.env.PORT || 3000,
-      heroku = process.env.HEROKU || null;
-
-const ngJWTRoutes = require('./ng-jwt-routes/api');
+      heroku = process.env.HEROKU || null,
+      routes = require('./routes/main-routes/api'),
+      ngJWTRoutes = require('./routes/ng-jwt-routes/api');
 
 require('dotenv').config();
 
@@ -18,7 +17,10 @@ mongoose.connect(
   `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster0-wgddl.mongodb.net/test?retryWrites=true`,
   { useNewUrlParser: true, useUnifiedTopology: true })
     .then(data => console.log(`MongoDB: connected successfully`))
-    .catch(err => console.log(`MongoDB: fail`));
+    .catch(err => {
+        console.log(`MongoDB: fail`);
+        console.error( err );
+    });
 
 //Static directory
 app.use(express.static(__dirname + '/public'));
@@ -42,8 +44,6 @@ app.listen(port, () => {
 });
 
 /*****************************************************/
-
-
 /*
 const MongoClient = require(‘mongodb’).MongoClient;
 const uri = "mongodb+srv://duxard:<password>@cluster0-wgddl.mongodb.net/test?retryWrites=true";

@@ -2,7 +2,8 @@
 
 const express = require('express'),
       router = express.Router(),
-      User = require('../models/User.js');
+      jwt = require('jsonwebtoken'),
+      User = require('../../models/User.js');
 
 router.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");

@@ -1,11 +1,10 @@
 const express = require('express'),
       router = express.Router(),
-      jwt = require('jsonwebtoken'),
-      Todo = require('../models/Todo.js'),
-      Post = require('../models/Post.js'),
-      Projects = require('../models/Projects.js'),
-      InstagramPosts = require('../models/InstagramPosts.js'),
-      NewsFeed = require('../models/NewsFeed.js');
+      Todo = require('../../models/Todo.js'),
+      Post = require('../../models/Post.js'),
+      Projects = require('../../models/Projects.js'),
+      InstagramPosts = require('../../models/InstagramPosts.js'),
+      NewsFeed = require('../../models/NewsFeed.js');
 
 router.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
